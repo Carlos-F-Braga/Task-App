@@ -68,8 +68,8 @@ app.get('/users/:id', async (req, res) => {
 
 app.patch('/users/:id', async (req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdated = ['name', 'email', 'password', 'age']
-    const isValidOperation = updates.every((update) => allowedUpdated.includes(update))
+    const allowedUpdates = ['name', 'email', 'password', 'age']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation)
         return res.status(400).send({error: 'Invalid updates!'})
@@ -147,8 +147,8 @@ app.get('/tasks/:id', async (req, res) => {
 
 app.patch('/tasks/:id', async (req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdated = ['description', 'completed']
-    const isValidOperation = updates.every((update) => allowedUpdated.includes(update))
+    const allowedUpdates = ['description', 'completed']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation)
         return res.status(400).send({error: 'Invalid updates!'})

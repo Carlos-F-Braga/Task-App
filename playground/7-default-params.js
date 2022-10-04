@@ -5,4 +5,4 @@ const greeter = (name = 'Marcos') => {
 
 greeter('Carlos')
 
-greeter()
+greeter('SAD')

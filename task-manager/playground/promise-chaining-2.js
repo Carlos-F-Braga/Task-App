@@ -18,4 +18,4 @@ const deleteTaskAndCount = async (id) => {
 
 deleteTaskAndCount('633cbbf64c3ffd29d06abf42').then((count) => {
     console.log('count', count)
-})
+}).catch(e => console.log(e))

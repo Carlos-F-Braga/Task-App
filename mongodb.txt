@@ -1,0 +1,1 @@
+/Users/T-Gamer/mongodb/bin/mongod.exe --dbpath=/Users/T-Gamer/mongodb-data

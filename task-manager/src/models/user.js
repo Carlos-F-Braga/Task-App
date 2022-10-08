@@ -75,6 +75,8 @@ userSchema.methods.toJSON = function () {
     return userObject
 }
 
+// email key: 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
+
 userSchema.methods.generateAuthToken = async function () {
     const user = this
     const token = jwt.sign({ _id: user._id.toString() }, 'thisismynewcourse')

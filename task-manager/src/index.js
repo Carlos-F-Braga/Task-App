@@ -8,6 +8,11 @@ const app = express()
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 
+app.use((req, res, next) => {
+    console.log(req.method, req.path)
+    next()
+})
+
 app.use(userRouter)
 app.use(taskRouter)
 

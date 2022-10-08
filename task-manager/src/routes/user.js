@@ -3,6 +3,10 @@ const router = new express.Router()
 const auth = require('../middleware/auth')
 const User = require('../models/user')
 
+router.get('/users/me', auth, async (req, res) => {
+    res.status(200).send(req.user)
+})
+
 router.post('/users', async (req, res) => {
     const user = new User(req.body)
 

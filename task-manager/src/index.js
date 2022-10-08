@@ -62,6 +62,24 @@ const swaggerOptions = {
 // I wanna kill myself
 // main()
 
+// const multer = require('multer')
+// const upload = multer({
+//   dest: 'images',
+//   limits: {
+//     fileSize: 1000000
+//   },
+//   fileFilter(req, file, cb) {
+//     if (!file.originalname.match(/\.(doc|docx)$/)) {
+//         return cb(new Error('File must be a Doc'))
+//     }
+//     cb(undefined, true)
+//   }
+// })
+
+// app.post('/upload', upload.single('upload'),  (req, res) => {
+//   res.send()
+// })
+
 app.use(userRouter)
 app.use(taskRouter)
 
@@ -69,21 +87,5 @@ app.listen(port, () => {
     console.log('Server is listening on port', port )
 })
 
-const multer = require('multer')
-const upload = multer({
-  dest: 'images',
-  limits: {
-    fileSize: 1000000
-  },
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(doc|docx)$/)) {
-        return cb(new Error('File must be a Doc'))
-    }
-    cb(undefined, true)
-  }
-})
 
-app.post('/upload', upload.single('upload'),  (req, res) => {
-  res.send()
-})
 

@@ -35,6 +35,32 @@ try {
 }
 })
 
+router.post('/users/logout', auth,  async (req, res) => {
+    try {
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token !== req.token //reoving the token in use from the array of all tokens
+        })
+
+        await req.user.save()
+
+        res.status(200).send('Logout Sucessful!')
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+router.post('/users/logoutAll', auth,  async (req, res) => {
+    try {
+        req.user.tokens = []
+
+        await req.user.save()
+
+        res.status(200).send('Logout All Sucessful!')
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
 router.get('/users', auth, async (req, res) => {
 
     try {

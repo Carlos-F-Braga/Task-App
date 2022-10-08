@@ -48,16 +48,8 @@ const swaggerOptions = {
 //     }
 // })
 
-app.use(userRouter)
-app.use(taskRouter)
-
-app.listen(port, () => {
-    console.log('Server is listening on port', port )
-})
-
-const Task = require('./models/task')
-const User = require('./models/user')
-
+// const Task = require('./models/task')
+// const User = require('./models/user')
 // const main = async () => {
 //     const task = await Task.findById('6340eaaa9be6d136fc45ba60')
 //     await task.populate('owner').execPopulate()
@@ -69,3 +61,20 @@ const User = require('./models/user')
 // }
 // I wanna kill myself
 // main()
+
+app.use(userRouter)
+app.use(taskRouter)
+
+app.listen(port, () => {
+    console.log('Server is listening on port', port )
+})
+
+const multer = require('multer')
+const upload = multer({
+  dest: 'images'
+})
+
+app.post('/upload', upload.single('upload'),  (req, res) => {
+  res.send()
+})
+

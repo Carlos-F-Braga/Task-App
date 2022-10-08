@@ -8,9 +8,20 @@ const app = express()
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 
+// app.use((req, res, next) => {
+//     if (req.method === 'GET') {
+//         res.send('GET REQUEST DISABLED')
+//     } else {
+//         next()
+//     }
+// })
+
 app.use((req, res, next) => {
-    console.log(req.method, req.path)
-    next()
+    if (req.method) {
+        res.status(503).send('SHUT DOWN')
+    } else {
+        next()
+    }
 })
 
 app.use(userRouter)

@@ -23,6 +23,24 @@ router.post('/tasks', auth, async (req, res) => {
     // })
 })
 
+router.get('/tasks/me', auth, async (req, res) => {
+
+    const tasks = await Task.find({ owner: req.user._id })
+    // await req.user.populate('tasks').execPopulate()
+
+    try {
+        res.status(200).send(tasks)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+
+    // Task.find({}).then((tasks) => {
+    //     res.status(200).send(tasks)
+    // }).catch((err) => {
+    //     res.status(500).send()
+    // })
+})
+
 router.get('/tasks', async (req, res) => {
 
     const tasks = await Task.find({})
@@ -49,7 +67,7 @@ router.get('/tasks/:id', auth, async (req, res) => {
         if (!task) {
             return res.status(404).send()
         }
-        
+
         res.status(200).send(task)
     } catch (e) {
         return res.status(500).send(e)

@@ -100,6 +100,29 @@ router.get('/users/:id', async (req, res) => {
     // })
 })
 
+router.patch('/users/me', auth, async (req, res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['name', 'email', 'password', 'age']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+    if (!isValidOperation)
+        return res.status(400).send({error: 'Invalid updates!'})
+
+    try {
+        updates.forEach((update) => req.user[update] = req.body[update])
+
+        await req.user.save()
+        
+        if (!req.user) {
+            return res.status(404).send('No user exists')
+        }
+
+        res.status(200).send(req.user)
+    } catch (e) {
+        return res.status(400).send(e)
+    }
+})
+
 router.patch('/users/:id', async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'email', 'password', 'age']
@@ -122,6 +145,22 @@ router.patch('/users/:id', async (req, res) => {
         }
 
         res.status(200).send(user)
+    } catch (e) {
+        return res.status(400).send(e)
+    }
+})
+
+router.delete('/users/me', auth, async (req, res) => {
+    try {
+        // const user = await User.findByIdAndDelete(req.user._id)
+        
+        // if (!user) {
+        //     return res.status(404).send('No user exists')
+        // }
+
+        await req.user.remove()
+
+        res.status(200).send(req.user)
     } catch (e) {
         return res.status(400).send(e)
     }

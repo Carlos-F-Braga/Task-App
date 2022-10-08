@@ -54,3 +54,12 @@ app.use(taskRouter)
 app.listen(port, () => {
     console.log('Server is listening on port', port )
 })
+
+const Task = require('./models/task')
+
+const main = async () => {
+    const task = await Task.findById('6340eaaa9be6d136fc45ba60')
+    await task.populate('owner').execPopulate()
+}
+
+main()

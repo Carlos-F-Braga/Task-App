@@ -26,7 +26,7 @@ const swaggerOptions = {
         servers: ['http://localhost:' + port]
       }
     },
-    apis: ['./routes/*.js', './swagger/*.js']
+    apis: ['./src/routes/*.js', './src/swagger/*.js']
   };
   const swaggerDocs = swaggerJsDoc(swaggerOptions);
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));

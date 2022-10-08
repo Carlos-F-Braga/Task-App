@@ -16,13 +16,13 @@ app.use(bp.urlencoded({ extended: true }))
 //     }
 // })
 
-app.use((req, res, next) => {
-    if (req.method) {
-        res.status(503).send('SHUT DOWN')
-    } else {
-        next()
-    }
-})
+// app.use((req, res, next) => {
+//     if (req.method) {
+//         res.status(503).send('SHUT DOWN')
+//     } else {
+//         next()
+//     }
+// })
 
 app.use(userRouter)
 app.use(taskRouter)

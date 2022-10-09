@@ -1,7 +1,5 @@
 /**
  * @swagger
- * 
- * 
  * /users/me:
  *  get:
  *    tags:

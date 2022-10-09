@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon src/index.js",
-    "dev": "nodemon src/index.js",
+    "dev": "env-cmd ./config/dev.env nodemon src/index.js",
     "mongodb": "/Users/T-Gamer/mongodb/bin/mongod.exe --dbpath=/Users/T-Gamer/mongodb-data",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

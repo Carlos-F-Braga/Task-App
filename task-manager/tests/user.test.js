@@ -42,3 +42,36 @@ test('should not login not existing user', async () => {
         password: 'kpitoa'
     }).expect(400)
 })
+
+test('should get user profile for user', async () => {
+    await request(app)
+        .get('/users/me')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send()
+        .expect(200)
+})
+
+
+test('should not get user profile for unauthenticated user', async () => {
+    await request(app)
+        .get('/users/me')
+        .send()
+        .expect(401)
+})
+
+
+test('should delete account for user', async () => {
+    await request(app)
+        .delete('/users/me')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send()
+        .expect(200)
+})
+
+
+test('should not delete user profile for unauthenticated user', async () => {
+    await request(app)
+        .delete('/users/me')
+        .send()
+        .expect(401)
+})

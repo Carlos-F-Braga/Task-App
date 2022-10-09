@@ -12,7 +12,17 @@ const sendWelcomeEmail = (email, name) => {
     })
 }
 
+const sendCuntEmail = (email, name) => {
+    sgMail.send({
+        to: email,
+        from: 'carlos.goncalves@agrofauna.com.br',
+        subject: 'Thanks for getting out.',
+        text:  `Goodbye ${name}.`
+    })
+}
+
 module.exports = {
-    sendWelcomeEmail
+    sendWelcomeEmail,
+    sendCuntEmail
 }
 

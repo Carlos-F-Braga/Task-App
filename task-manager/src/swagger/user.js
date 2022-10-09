@@ -200,8 +200,6 @@
  *    responses:
  *      '200':
  *        description: Sucesso
- *      '404':
- *        description: Erro de Rastreio não Encontrado
  *      '500':
  *        description: Erro
  * 

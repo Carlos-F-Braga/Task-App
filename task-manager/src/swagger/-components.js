@@ -46,7 +46,15 @@
  *        completed:
  *          type: "boolean"
  *          example: true
- * 
+ *    PatchTask:
+ *      type: object
+ *      properties:
+ *        description:
+ *          type: "string"
+ *          example: "This is a patched description"
+ *        completed:
+ *          type: "boolean"
+ *          example: false
  * 
  * 
  */

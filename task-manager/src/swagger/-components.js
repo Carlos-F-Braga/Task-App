@@ -28,5 +28,17 @@
  *        password:
  *          type: "string"
  *          example: "12345367"
+ *    Login:
+ *      type: object
+ *      properties:
+ *        email:
+ *          type: "string"
+ *          example: "carlos.goncalves@agrofauna.com"
+ *        password:
+ *          type: "string"
+ *          example: "12345367"
+ * 
+ * 
+ * 
  * 
  */

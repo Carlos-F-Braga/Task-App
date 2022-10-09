@@ -4,10 +4,10 @@
  *  get:
  *    tags:
  *    - "User.js"
- *    summary: Rota de get das Cidades de um Estado
+ *    summary: Rota de get do próprio usuário
  *    security:
  *    - bearerAuth: []
- *    description: Realiza um get recebendo todos as cidades em um especifico estado
+ *    description: Realiza um get do usuário logado
  *    responses:
  *      '200':
  *        description: Sucesso

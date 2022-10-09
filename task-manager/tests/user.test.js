@@ -89,10 +89,133 @@ test('should delete account for user', async () => {
     expect(user).toBeNull()
 })
 
-
 test('should not delete user profile for unauthenticated user', async () => {
     await request(app)
         .delete('/users/me')
         .send()
         .expect(401)
+})
+
+test('should upload avatar image', async () => {
+    await request(app)
+        .post('/users/me/avatar')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .attach('avatar', 'tests/fixtures/profile-pic.png')
+        .expect(200)
+
+    const user = await User.findById(userOneId)
+
+    expect(user.avatar).toEqual(expect.any(Buffer))
+})
+
+test('should get avatar image', async () => {
+    await request(app)
+        .post('/users/me/avatar')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .attach('avatar', 'tests/fixtures/profile-pic.png')
+        .expect(200)
+
+    const response = await request(app)
+        .get('/users/me/avatar')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .expect(200)
+
+    expect(response.body).toEqual(expect.any(Buffer))
+})
+
+test('should delete avatar image', async () => {
+    await request(app)
+        .post('/users/me/avatar')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .attach('avatar', 'tests/fixtures/profile-pic.png')
+        .expect(200)
+
+    const response = await request(app)
+        .delete('/users/me/avatar')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .expect(200)
+
+    expect(response.body).toEqual(expect.any(Buffer))
+})
+
+test('should update existing user', async () => {
+    await request(app)
+        .patch('/users/me')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send({
+            name: 'Carlao'
+        }).expect(200)
+
+    const user = await User.findById(userOneId)
+
+    expect(user.name).toEqual('Carlao')
+})
+
+test('should not update not authenticated user', async () => {
+    await request(app).post('/users/login').send({
+        email: 'cara@#ero.corie',
+        password: 'kpitoa'
+    }).expect(400)
+})
+test('should not update not authenticated user', async () => {
+    await request(app)
+        .patch('/users/me')
+        .send({
+            name: 'Carlao'
+        }).expect(401)
+})
+
+test('should get user profile by id', async () => {
+    const response = await request(app)
+        .get(`/users/${userOneId}`)
+        .send()
+        .expect(200)
+
+    expect(response.body.name).toEqual('Mike')
+})
+
+test('should not get user profile with fake id', async () => {
+    await request(app)
+        .get(`/users/${userOneId}1`)
+        .send()
+        .expect(500)
+})
+
+test('should update user profile by id', async () => {
+    const response = await request(app)
+        .patch(`/users/${userOneId}`)
+        .send()
+        .send({
+            name: 'Carlao'
+        }).expect(200)
+
+    expect(response.body.name).toEqual('Carlao')
+})
+
+test('should not get user profile with fake id', async () => {
+    await request(app)
+        .patch(`/users/${userOneId}1`)
+        .send({
+            name: 'Carlao'
+        }).expect(400)
+})
+
+test('should delete user profile by id', async () => {
+    const response = await request(app)
+        .delete(`/users/${userOneId}`)
+        .send()
+        .expect(200)
+
+    expect(response.body.name).toEqual('Mike')
+
+    const user = await User.findById(userOneId)
+
+    expect(user).toBeNull()
+})
+
+test('should not get user profile with fake id', async () => {
+    await request(app)
+        .delete(`/users/${userOneId}1`)
+        .send()
+        .expect(400)
 })

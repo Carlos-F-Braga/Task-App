@@ -37,7 +37,15 @@
  *        password:
  *          type: "string"
  *          example: "12345367"
- * 
+ *    createTask:
+ *      type: object
+ *      properties:
+ *        description:
+ *          type: "string"
+ *          example: "This is a description"
+ *        completed:
+ *          type: "boolean"
+ *          example: true
  * 
  * 
  * 

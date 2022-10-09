@@ -151,6 +151,15 @@ test('should update existing user', async () => {
     expect(user.name).toEqual('Carlao')
 })
 
+test('should not update existing user with wrong payload', async () => {
+    await request(app)
+        .patch('/users/me')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send({
+            names: 'Carlao'
+        }).expect(400)
+})
+
 test('should not update not authenticated user', async () => {
     await request(app).post('/users/login').send({
         email: 'cara@#ero.corie',
@@ -190,6 +199,15 @@ test('should update user profile by id', async () => {
         }).expect(200)
 
     expect(response.body.name).toEqual('Carlao')
+})
+
+test('should not update user profile with wrong payload', async () => {
+    await request(app)
+        .patch(`/users/${userOneId}`)
+        .send()
+        .send({
+            names: 'Carlao'
+        }).expect(400)
 })
 
 test('should not get user profile with fake id', async () => {

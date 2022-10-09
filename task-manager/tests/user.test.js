@@ -27,6 +27,14 @@ test('should sign up a new user', async () => {
     expect(user.password).not.toEqual('123478593')
 })
 
+test('should not sign up a user with wrong payload', async () => {
+    await request(app).post('/users').send({
+        namse: 'Carlos',
+        email: 'carlois@egeru.com.br',
+        password: '123478593'
+    }).expect(400)
+})
+
 test('should login existing user', async () => {
     const response = await request(app).post('/users/login').send({
         email: userOne.email,

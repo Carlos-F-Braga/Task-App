@@ -9,6 +9,9 @@
     "mongodb": "/Users/T-Gamer/mongodb/bin/mongod.exe --dbpath=/Users/T-Gamer/mongodb-data",
     "test": "env-cmd ./config/test.env jest --watch"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

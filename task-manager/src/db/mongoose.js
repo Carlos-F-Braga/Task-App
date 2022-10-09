@@ -5,7 +5,9 @@ const port = '27017'
 
 const connectionURL = process.env.MONGODB_URL
 
-mongoose.connect(connectionURL + '/task-manager-api', {
+const database = process.env.NAME === 'DEV' ? '/task-manager-api' : '/test'
+
+mongoose.connect(connectionURL + database, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false
